@@ -44,75 +44,30 @@ public class Client {
     }
 
     // Getters and setters
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getNumClient() { return numClient; }
+    public void setNumClient(String numClient) { this.numClient = numClient; }
 
-    public String getNumClient() {
-        return numClient;
-    }
+    public String getNom() { return nom; }
+    public void setNom(String nom) { this.nom = nom; }
 
-    public void setNumClient(String numClient) {
-        this.numClient = numClient;
-    }
+    public String getPrenom() { return prenom; }
+    public void setPrenom(String prenom) { this.prenom = prenom; }
 
-    public String getNom() {
-        return nom;
-    }
+    public String getQuartier() { return quartier; }
+    public void setQuartier(String quartier) { this.quartier = quartier; }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+    public String getVille() { return ville; }
+    public void setVille(String ville) { this.ville = ville; }
 
-    public String getPrenom() {
-        return prenom;
-    }
+    public String getNomAgent() { return nomAgent; }
+    public void setNomAgent(String nomAgent) { this.nomAgent = nomAgent; }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
+    public String getRfid() { return rfid; }
+    public void setRfid(String rfid) { this.rfid = rfid; }
 
-    public String getQuartier() {
-        return quartier;
-    }
-
-    public void setQuartier(String quartier) {
-        this.quartier = quartier;
-    }
-
-    public String getVille() {
-        return ville;
-    }
-
-    public void setVille(String ville) {
-        this.ville = ville;
-    }
-
-    public String getNomAgent() {
-        return nomAgent;
-    }
-
-    public void setNomAgent(String nomAgent) {
-        this.nomAgent = nomAgent;
-    }
-
-    public String getRfid() {
-        return rfid;
-    }
-
-    public void setRfid(String rfid) {
-        this.rfid = rfid;
-    }
-
-    public Date getDateCreation() {
-        return dateCreation;
-    }
-
-    public void setDateCreation(Date dateCreation) {
-        this.dateCreation = dateCreation;
-    }
+    public Date getDateCreation() { return dateCreation; }
+    public void setDateCreation(Date dateCreation) { this.dateCreation = dateCreation; }
 }
