@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/transactions")
@@ -17,42 +16,42 @@ public class TransactionController {
     @Autowired
     private TransactionService transactionService;
 
-    // Récupérer toutes les transactions
-    @GetMapping
-    public ResponseEntity<List<TransactionDTO>> getAllTransactions() {
-        List<Transaction> transactions = transactionService.getAllTransactions();
-        List<TransactionDTO> transactionDTOs = transactions.stream().map(transaction -> new TransactionDTO(
-                transaction.getId(),
-                transaction.getTerminalId(),
-                transaction.getForfaitType(),
-                transaction.getClientRfid(),
-                transaction.getUtilisateurId(),
-                transaction.getDateTransaction()
-        )).collect(Collectors.toList());
-
-        return ResponseEntity.ok(transactionDTOs);
-    }
-
     // Créer une nouvelle transaction
     @PostMapping
-    public ResponseEntity<TransactionDTO> createTransaction(@RequestBody TransactionDTO transactionDTO) {
+    public ResponseEntity<Transaction> createTransaction(@RequestBody TransactionDTO transactionDTO) {
         Transaction transaction = new Transaction();
-        transaction.setTerminalId(transactionDTO.getTerminalId());
-        transaction.setForfaitType(transactionDTO.getForfaitType());
+        transaction.setClientId(transactionDTO.getClientId());
         transaction.setClientRfid(transactionDTO.getClientRfid());
-        transaction.setUtilisateurId(transactionDTO.getUtilisateurId());
+        transaction.setNom(transactionDTO.getNom());
+        transaction.setPrenom(transactionDTO.getPrenom());
+        transaction.setMontant(transactionDTO.getMontant());
         transaction.setDateTransaction(transactionDTO.getDateTransaction());
 
-        Transaction newTransaction = transactionService.createTransaction(transaction);
-        TransactionDTO newTransactionDTO = new TransactionDTO(
-                newTransaction.getId(),
-                newTransaction.getTerminalId(),
-                newTransaction.getForfaitType(),
-                newTransaction.getClientRfid(),
-                newTransaction.getUtilisateurId(),
-                newTransaction.getDateTransaction()
+        Transaction savedTransaction = transactionService.saveTransaction(
+                transaction.getClientId(),
+                transaction.getClientRfid(),
+                transaction.getNom(),
+                transaction.getPrenom(),
+                transaction.getMontant()
         );
 
-        return ResponseEntity.ok(newTransactionDTO);
+        return ResponseEntity.ok(savedTransaction);
+    }
+
+    // Récupérer toutes les transactions
+    @GetMapping
+    public ResponseEntity<List<Transaction>> getAllTransactions() {
+        List<Transaction> transactions = transactionService.getAllTransactions();
+        return ResponseEntity.ok(transactions);
+    }
+
+    // Récupérer une transaction par ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Transaction> getTransactionById(@PathVariable Long id) {
+        Transaction transaction = transactionService.getTransactionById(id);
+        if (transaction != null) {
+            return ResponseEntity.ok(transaction);
+        }
+        return ResponseEntity.notFound().build();
     }
 }

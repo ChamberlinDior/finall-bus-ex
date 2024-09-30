@@ -23,11 +23,11 @@ public class Forfait {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
-    private Client client;
+    private com.bustrans.backend.model.Client client;
 
     public Forfait() {}
 
-    public Forfait(String typeForfait, Date dateActivation, Date dateExpiration, Client client) {
+    public Forfait(String typeForfait, Date dateActivation, Date dateExpiration, com.bustrans.backend.model.Client client) {
         this.typeForfait = typeForfait;
         this.dateActivation = dateActivation;
         this.dateExpiration = dateExpiration;
@@ -67,11 +67,11 @@ public class Forfait {
         this.dateExpiration = dateExpiration;
     }
 
-    public Client getClient() {
+    public com.bustrans.backend.model.Client getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(com.bustrans.backend.model.Client client) {
         this.client = client;
     }
 }

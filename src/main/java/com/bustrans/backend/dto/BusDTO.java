@@ -1,5 +1,6 @@
 package com.bustrans.backend.dto;
 
+
 import java.util.Date;
 
 public class BusDTO {
@@ -14,6 +15,8 @@ public class BusDTO {
     private Date debutTrajet;
     private Date finTrajet;
     private String lastDestination;
+    private Integer niveauBatterie; // Nouveau champ pour le niveau de batterie
+    private boolean isCharging; // Nouveau champ pour l'état de charge
 
     // Getters et Setters
 
@@ -104,4 +107,21 @@ public class BusDTO {
     public void setLastDestination(String lastDestination) {
         this.lastDestination = lastDestination;
     }
+
+    public Integer getNiveauBatterie() {
+        return niveauBatterie;
+    }
+
+    public void setNiveauBatterie(Integer niveauBatterie) {
+        this.niveauBatterie = niveauBatterie;
+    }
+
+    public boolean isCharging() {
+        return isCharging;
+    }
+
+    public void setCharging(boolean isCharging) {
+        this.isCharging = isCharging;
+    }
 }
+

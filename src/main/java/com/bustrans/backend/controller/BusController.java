@@ -1,5 +1,6 @@
 package com.bustrans.backend.controller;
 
+
 import com.bustrans.backend.model.Bus;
 import com.bustrans.backend.service.BusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class BusController {
             @PathVariable String macAddress,
             @RequestParam String lastDestination,
             @RequestParam String chauffeurNom,
-            @RequestParam String chauffeurUniqueNumber) {  // Ajout de chauffeurNom et chauffeurUniqueNumber
+            @RequestParam String chauffeurUniqueNumber) {
         Bus bus = busService.updateChauffeurAndDestinationByMacAddress(macAddress, lastDestination, chauffeurNom, chauffeurUniqueNumber);
         if (bus != null) {
             return ResponseEntity.ok("Chauffeur et destination mis à jour avec succès.");
@@ -78,26 +79,16 @@ public class BusController {
         return ResponseEntity.notFound().build();
     }
 
-    // Mettre à jour uniquement la destination d'un bus
-    @PutMapping("/mac/{macAddress}/update-destination")
-    public ResponseEntity<?> updateLastDestination(
+    // Mettre à jour le niveau de batterie et l'état de charge
+    @PostMapping("/mac/{macAddress}/update-battery")
+    public ResponseEntity<?> updateBusBatteryLevel(
             @PathVariable String macAddress,
-            @RequestParam String lastDestination) {
-        Bus bus = busService.updateLastDestination(macAddress, lastDestination);
-        if (bus != null) {
-            return ResponseEntity.ok("Destination mise à jour avec succès.");
-        }
-        return ResponseEntity.notFound().build();
-    }
+            @RequestParam Integer niveauBatterie,
+            @RequestParam boolean isCharging) {
 
-    // Créer une nouvelle destination si elle n'existe pas
-    @PostMapping("/mac/{macAddress}/create-destination")
-    public ResponseEntity<?> createOrUpdateDestination(
-            @PathVariable String macAddress,
-            @RequestParam String lastDestination) {
-        Bus bus = busService.createOrUpdateLastDestination(macAddress, lastDestination);
+        Bus bus = busService.updateBatteryLevel(macAddress, niveauBatterie, isCharging);
         if (bus != null) {
-            return ResponseEntity.ok("Destination créée ou mise à jour avec succès.");
+            return ResponseEntity.ok("Niveau de batterie et état de charge mis à jour avec succès.");
         }
         return ResponseEntity.notFound().build();
     }

@@ -1,5 +1,4 @@
 package com.bustrans.backend.model;
-
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -24,6 +23,12 @@ public class Bus {
 
     @Column(nullable = true, unique = true)
     private String ipAddress;
+
+    @Column(name = "niveau_batterie", nullable = true)
+    private Integer niveauBatterie; // Nouveau champ pour le niveau de batterie
+
+    @Column(name = "is_charging", nullable = false)
+    private boolean isCharging; // Nouveau champ pour savoir si le bus est en charge
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "debut_trajet")
@@ -130,5 +135,21 @@ public class Bus {
 
     public void setLastDestination(String lastDestination) {
         this.lastDestination = lastDestination;
+    }
+
+    public Integer getNiveauBatterie() {
+        return niveauBatterie;
+    }
+
+    public void setNiveauBatterie(Integer niveauBatterie) {
+        this.niveauBatterie = niveauBatterie;
+    }
+
+    public boolean isCharging() {
+        return isCharging;
+    }
+
+    public void setCharging(boolean isCharging) {
+        this.isCharging = isCharging;
     }
 }

@@ -5,26 +5,14 @@ import java.util.Date;
 public class TransactionDTO {
 
     private Long id;
-    private String terminalId;
-    private String forfaitType;
+    private Long clientId;
     private String clientRfid;
-    private String utilisateurId;
+    private String nom;
+    private String prenom;
+    private double montant;
     private Date dateTransaction;
 
-    // Constructeur vide
-    public TransactionDTO() {}
-
-    // Constructeur avec tous les paramètres
-    public TransactionDTO(Long id, String terminalId, String forfaitType, String clientRfid, String utilisateurId, Date dateTransaction) {
-        this.id = id;
-        this.terminalId = terminalId;
-        this.forfaitType = forfaitType;
-        this.clientRfid = clientRfid;
-        this.utilisateurId = utilisateurId;
-        this.dateTransaction = dateTransaction;
-    }
-
-    // Getters et Setters
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -33,20 +21,12 @@ public class TransactionDTO {
         this.id = id;
     }
 
-    public String getTerminalId() {
-        return terminalId;
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setTerminalId(String terminalId) {
-        this.terminalId = terminalId;
-    }
-
-    public String getForfaitType() {
-        return forfaitType;
-    }
-
-    public void setForfaitType(String forfaitType) {
-        this.forfaitType = forfaitType;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 
     public String getClientRfid() {
@@ -57,12 +37,28 @@ public class TransactionDTO {
         this.clientRfid = clientRfid;
     }
 
-    public String getUtilisateurId() {
-        return utilisateurId;
+    public String getNom() {
+        return nom;
     }
 
-    public void setUtilisateurId(String utilisateurId) {
-        this.utilisateurId = utilisateurId;
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public double getMontant() {
+        return montant;
+    }
+
+    public void setMontant(double montant) {
+        this.montant = montant;
     }
 
     public Date getDateTransaction() {

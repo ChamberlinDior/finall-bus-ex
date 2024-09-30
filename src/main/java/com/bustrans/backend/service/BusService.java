@@ -1,5 +1,9 @@
 package com.bustrans.backend.service;
 
+
+
+
+
 import com.bustrans.backend.model.Bus;
 import com.bustrans.backend.repository.BusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +37,8 @@ public class BusService {
         Bus bus = busRepository.findByMacAddress(macAddress);
         if (bus != null) {
             bus.setLastDestination(lastDestination);
-            bus.setChauffeurNom(chauffeurNom);  // Mise à jour du nom du chauffeur
-            bus.setChauffeurUniqueNumber(chauffeurUniqueNumber);  // Mise à jour du numéro unique du chauffeur
+            bus.setChauffeurNom(chauffeurNom);
+            bus.setChauffeurUniqueNumber(chauffeurUniqueNumber);
             return busRepository.save(bus);
         }
         return null;
@@ -61,25 +65,13 @@ public class BusService {
         return null;
     }
 
-    // Mettre à jour uniquement la destination du bus
-    public Bus updateLastDestination(String macAddress, String lastDestination) {
+    // Mettre à jour le niveau de batterie et l'état de charge
+    public Bus updateBatteryLevel(String macAddress, Integer niveauBatterie, boolean isCharging) {
         Bus bus = busRepository.findByMacAddress(macAddress);
         if (bus != null) {
-            bus.setLastDestination(lastDestination);
+            bus.setNiveauBatterie(niveauBatterie);
+            bus.setCharging(isCharging);  // Mise à jour de l'état de charge
             return busRepository.save(bus);
-        }
-        return null;
-    }
-
-    // Créer ou mettre à jour la destination
-    public Bus createOrUpdateLastDestination(String macAddress, String lastDestination) {
-        Bus bus = busRepository.findByMacAddress(macAddress);
-        if (bus != null) {
-            if (bus.getLastDestination() == null || !bus.getLastDestination().equals(lastDestination)) {
-                bus.setLastDestination(lastDestination);
-                return busRepository.save(bus);
-            }
-            return bus;
         }
         return null;
     }

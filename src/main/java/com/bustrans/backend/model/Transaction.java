@@ -11,26 +11,25 @@ public class Transaction {
     private Long id;
 
     @Column(nullable = false)
-    private String terminalId;
-
-    @Column(nullable = false)
-    private String forfaitType;
+    private Long clientId;
 
     @Column(nullable = false)
     private String clientRfid;
 
     @Column(nullable = false)
-    private String utilisateurId;
+    private String nom;
+
+    @Column(nullable = false)
+    private String prenom;
+
+    @Column(nullable = false)
+    private double montant;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date dateTransaction;
 
-    public Transaction() {
-        this.dateTransaction = new Date();
-    }
-
-    // Getters et Setters
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -39,20 +38,12 @@ public class Transaction {
         this.id = id;
     }
 
-    public String getTerminalId() {
-        return terminalId;
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setTerminalId(String terminalId) {
-        this.terminalId = terminalId;
-    }
-
-    public String getForfaitType() {
-        return forfaitType;
-    }
-
-    public void setForfaitType(String forfaitType) {
-        this.forfaitType = forfaitType;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 
     public String getClientRfid() {
@@ -63,12 +54,28 @@ public class Transaction {
         this.clientRfid = clientRfid;
     }
 
-    public String getUtilisateurId() {
-        return utilisateurId;
+    public String getNom() {
+        return nom;
     }
 
-    public void setUtilisateurId(String utilisateurId) {
-        this.utilisateurId = utilisateurId;
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public double getMontant() {
+        return montant;
+    }
+
+    public void setMontant(double montant) {
+        this.montant = montant;
     }
 
     public Date getDateTransaction() {

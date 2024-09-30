@@ -3,8 +3,8 @@ package com.bustrans.backend.service;
 import com.bustrans.backend.dto.ForfaitDTO;
 import com.bustrans.backend.model.Client;
 import com.bustrans.backend.model.Forfait;
-import com.bustrans.backend.repository.ForfaitRepository;
 import com.bustrans.backend.repository.ClientRepository;
+import com.bustrans.backend.repository.ForfaitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class ForfaitService {
     private ForfaitRepository forfaitRepository;
 
     @Autowired
-    private ClientService clientService;
+    private com.bustrans.backend.service.ClientService clientService;
 
     @Autowired
     private ClientRepository clientRepository;

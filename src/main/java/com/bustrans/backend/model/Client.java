@@ -1,6 +1,7 @@
 package com.bustrans.backend.model;
 
 import jakarta.persistence.*;
+
 import java.util.Date;
 import java.util.UUID;
 
