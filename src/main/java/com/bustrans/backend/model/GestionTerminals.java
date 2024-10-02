@@ -12,22 +12,22 @@ public class GestionTerminals {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String androidId;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private int batteryLevel;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String terminalType;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String userName;
 
-    @Column(nullable = false)
+    @Column(nullable =true)
     private String userUniqueId;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDateTime connectionTime;
 
     private String clientName;
