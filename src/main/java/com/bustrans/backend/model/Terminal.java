@@ -1,11 +1,24 @@
-package com.bustrans.backend.dto;
+package com.bustrans.backend.model;
 
-public class TerminalDTO {
+import jakarta.persistence.*;
 
+@Entity
+public class Terminal {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, unique = true)
     private String terminalId;
+
+    @Column(nullable = false)
     private String typeTerminal;
+
+    @Column(nullable = false, unique = true)
     private String macAddress;
+
+    @Column(nullable = true)
     private String busMatricule;
 
     // Getters et Setters

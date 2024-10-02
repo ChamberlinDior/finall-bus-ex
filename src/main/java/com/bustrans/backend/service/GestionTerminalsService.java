@@ -1,6 +1,6 @@
 package com.bustrans.backend.service;
 
-import com.bustrans.backend.dto.TerminalDTO;
+import com.bustrans.backend.dto.GesTerminalsDTO;
 import com.bustrans.backend.model.GestionTerminals;
 import com.bustrans.backend.repository.GestionTerminalsRepository;
 import jakarta.transaction.Transactional;
@@ -18,7 +18,7 @@ public class GestionTerminalsService {
     private GestionTerminalsRepository gestionTerminalsRepository;
 
     @Transactional
-    public GestionTerminals saveTerminalInfo(TerminalDTO terminalDTO) {
+    public GestionTerminals saveTerminalInfo(GesTerminalsDTO terminalDTO) {
         GestionTerminals gestionTerminals = new GestionTerminals();
         gestionTerminals.setAndroidId(terminalDTO.getAndroidId());
         gestionTerminals.setBatteryLevel(terminalDTO.getBatteryLevel());
@@ -48,7 +48,7 @@ public class GestionTerminalsService {
     }
 
     @Transactional
-    public GestionTerminals updateTerminal(Long id, TerminalDTO terminalDTO) {
+    public GestionTerminals updateTerminal(Long id, GesTerminalsDTO terminalDTO) {
         Optional<GestionTerminals> terminalOptional = gestionTerminalsRepository.findById(id);
         if (terminalOptional.isPresent()) {
             GestionTerminals terminal = terminalOptional.get();

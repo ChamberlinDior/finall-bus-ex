@@ -1,6 +1,6 @@
 package com.bustrans.backend.controller;
 
-import com.bustrans.backend.dto.TerminalDTO;
+import com.bustrans.backend.dto.GesTerminalsDTO;
 import com.bustrans.backend.model.GestionTerminals;
 import com.bustrans.backend.service.GestionTerminalsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class GestionTerminalsController {
     private GestionTerminalsService gestionTerminalsService;
 
     @PostMapping
-    public ResponseEntity<GestionTerminals> saveTerminalInfo(@RequestBody TerminalDTO terminalDTO) {
+    public ResponseEntity<GestionTerminals> saveTerminalInfo(@RequestBody GesTerminalsDTO terminalDTO) {
         GestionTerminals savedTerminal = gestionTerminalsService.saveTerminalInfo(terminalDTO);
         return ResponseEntity.ok(savedTerminal);
     }
@@ -36,7 +36,7 @@ public class GestionTerminalsController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<GestionTerminals> updateTerminal(@PathVariable Long id, @RequestBody TerminalDTO terminalDTO) {
+    public ResponseEntity<GestionTerminals> updateTerminal(@PathVariable Long id, @RequestBody GesTerminalsDTO terminalDTO) {
         GestionTerminals updatedTerminal = gestionTerminalsService.updateTerminal(id, terminalDTO);
         return updatedTerminal != null ? ResponseEntity.ok(updatedTerminal) : ResponseEntity.notFound().build();
     }
