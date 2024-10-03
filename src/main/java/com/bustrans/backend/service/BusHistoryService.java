@@ -15,7 +15,7 @@ public class BusHistoryService {
     @Autowired
     private BusHistoryRepository busHistoryRepository;
 
-    // Récupérer l'historique d'un bus sous forme de DTO
+    // Méthode pour récupérer l'historique d'un bus par son ID
     public List<BusHistoryDTO> getBusHistoryByBusId(Long busId) {
         List<BusHistory> historyList = busHistoryRepository.findByBusId(busId);
         return historyList.stream()
@@ -23,7 +23,7 @@ public class BusHistoryService {
                 .collect(Collectors.toList());
     }
 
-    // Convertir un objet BusHistory en BusHistoryDTO
+    // Convertir un objet BusHistory en DTO
     private BusHistoryDTO convertToDTO(BusHistory busHistory) {
         BusHistoryDTO dto = new BusHistoryDTO();
         dto.setId(busHistory.getId());

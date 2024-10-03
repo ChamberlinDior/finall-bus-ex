@@ -8,5 +8,7 @@ import java.util.List;
 
 @Repository
 public interface BusHistoryRepository extends JpaRepository<BusHistory, Long> {
+
+    // Méthode pour récupérer l'historique d'un bus par son ID
     List<BusHistory> findByBusId(Long busId);
 }

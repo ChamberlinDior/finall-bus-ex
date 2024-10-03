@@ -14,7 +14,6 @@ public class BusHistoryDTO {
     private Date timestamp;
 
     // Getters et Setters
-
     public Long getId() {
         return id;
     }
