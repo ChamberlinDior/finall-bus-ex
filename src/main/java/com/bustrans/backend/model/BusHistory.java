@@ -1,7 +1,6 @@
 package com.bustrans.backend.model;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity
@@ -11,40 +10,28 @@ public class BusHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String modele;
+    @ManyToOne
+    @JoinColumn(name = "bus_id", nullable = false)
+    private Bus bus;
 
-    @Column(nullable = false)
-    private String matricule;
-
-    @Column(nullable = false)
-    private String marque;
-
-    @Column(nullable = false)
+    @Column(name = "chauffeur_nom")
     private String chauffeurNom;
 
-    @Column(nullable = false)
+    @Column(name = "chauffeur_unique_number")
     private String chauffeurUniqueNumber;
 
-    @Column(nullable = false)
+    @Column(name = "last_destination")
     private String lastDestination;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date debutTrajet;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = true)
-    private Date finTrajet;
-
-    @Column(name = "mac_address", nullable = false, unique = true)
-    private String macAddress;
-
-    @Column(nullable = true)
+    @Column(name = "niveau_batterie")
     private Integer niveauBatterie;
 
-    @Column(name = "is_charging", nullable = false)
+    @Column(name = "is_charging")
     private boolean isCharging;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "timestamp")
+    private Date timestamp;
 
     // Getters et Setters
     public Long getId() {
@@ -55,28 +42,12 @@ public class BusHistory {
         this.id = id;
     }
 
-    public String getModele() {
-        return modele;
+    public Bus getBus() {
+        return bus;
     }
 
-    public void setModele(String modele) {
-        this.modele = modele;
-    }
-
-    public String getMatricule() {
-        return matricule;
-    }
-
-    public void setMatricule(String matricule) {
-        this.matricule = matricule;
-    }
-
-    public String getMarque() {
-        return marque;
-    }
-
-    public void setMarque(String marque) {
-        this.marque = marque;
+    public void setBus(Bus bus) {
+        this.bus = bus;
     }
 
     public String getChauffeurNom() {
@@ -103,30 +74,6 @@ public class BusHistory {
         this.lastDestination = lastDestination;
     }
 
-    public Date getDebutTrajet() {
-        return debutTrajet;
-    }
-
-    public void setDebutTrajet(Date debutTrajet) {
-        this.debutTrajet = debutTrajet;
-    }
-
-    public Date getFinTrajet() {
-        return finTrajet;
-    }
-
-    public void setFinTrajet(Date finTrajet) {
-        this.finTrajet = finTrajet;
-    }
-
-    public String getMacAddress() {
-        return macAddress;
-    }
-
-    public void setMacAddress(String macAddress) {
-        this.macAddress = macAddress;
-    }
-
     public Integer getNiveauBatterie() {
         return niveauBatterie;
     }
@@ -141,5 +88,13 @@ public class BusHistory {
 
     public void setCharging(boolean isCharging) {
         this.isCharging = isCharging;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 }

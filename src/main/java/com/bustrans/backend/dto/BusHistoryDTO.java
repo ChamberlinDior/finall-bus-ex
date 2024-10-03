@@ -5,17 +5,13 @@ import java.util.Date;
 public class BusHistoryDTO {
 
     private Long id;
-    private String modele;
-    private String matricule;
-    private String marque;
+    private Long busId;
     private String chauffeurNom;
     private String chauffeurUniqueNumber;
     private String lastDestination;
-    private Date debutTrajet;
-    private Date finTrajet;
-    private String macAddress;
     private Integer niveauBatterie;
     private boolean isCharging;
+    private Date timestamp;
 
     // Getters et Setters
 
@@ -27,28 +23,12 @@ public class BusHistoryDTO {
         this.id = id;
     }
 
-    public String getModele() {
-        return modele;
+    public Long getBusId() {
+        return busId;
     }
 
-    public void setModele(String modele) {
-        this.modele = modele;
-    }
-
-    public String getMatricule() {
-        return matricule;
-    }
-
-    public void setMatricule(String matricule) {
-        this.matricule = matricule;
-    }
-
-    public String getMarque() {
-        return marque;
-    }
-
-    public void setMarque(String marque) {
-        this.marque = marque;
+    public void setBusId(Long busId) {
+        this.busId = busId;
     }
 
     public String getChauffeurNom() {
@@ -75,30 +55,6 @@ public class BusHistoryDTO {
         this.lastDestination = lastDestination;
     }
 
-    public Date getDebutTrajet() {
-        return debutTrajet;
-    }
-
-    public void setDebutTrajet(Date debutTrajet) {
-        this.debutTrajet = debutTrajet;
-    }
-
-    public Date getFinTrajet() {
-        return finTrajet;
-    }
-
-    public void setFinTrajet(Date finTrajet) {
-        this.finTrajet = finTrajet;
-    }
-
-    public String getMacAddress() {
-        return macAddress;
-    }
-
-    public void setMacAddress(String macAddress) {
-        this.macAddress = macAddress;
-    }
-
     public Integer getNiveauBatterie() {
         return niveauBatterie;
     }
@@ -113,5 +69,13 @@ public class BusHistoryDTO {
 
     public void setCharging(boolean isCharging) {
         this.isCharging = isCharging;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 }

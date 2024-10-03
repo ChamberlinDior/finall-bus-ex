@@ -8,7 +8,5 @@ import java.util.List;
 
 @Repository
 public interface BusHistoryRepository extends JpaRepository<BusHistory, Long> {
-
-    // Rechercher l'historique des trajets par adresse MAC
-    List<BusHistory> findByMacAddress(String macAddress);
+    List<BusHistory> findByBusId(Long busId);
 }
