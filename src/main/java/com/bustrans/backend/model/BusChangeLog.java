@@ -27,7 +27,6 @@ public class BusChangeLog {
     private Date dateChange;
 
     // Getters et Setters
-
     public Long getId() {
         return id;
     }

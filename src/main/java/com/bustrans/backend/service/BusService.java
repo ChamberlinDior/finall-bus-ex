@@ -93,4 +93,9 @@ public class BusService {
     public List<BusChangeLog> getBusChangeLog() {
         return busChangeLogRepository.findAll();
     }
+
+    // Récupérer les logs d'un bus par son adresse MAC
+    public List<BusChangeLog> getBusChangeLogByMacAddress(String macAddress) {
+        return busChangeLogRepository.findByBusMacAddress(macAddress);
+    }
 }

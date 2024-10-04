@@ -94,9 +94,9 @@ public class BusController {
     }
 
     // Récupérer l'historique des changements de chauffeur et de destination
-    @GetMapping("/history")
-    public ResponseEntity<List<BusChangeLog>> getBusChangeLog() {
-        List<BusChangeLog> logs = busService.getBusChangeLog();
+    @GetMapping("/mac/{macAddress}/history")
+    public ResponseEntity<List<BusChangeLog>> getBusChangeLogByMac(@PathVariable String macAddress) {
+        List<BusChangeLog> logs = busService.getBusChangeLogByMacAddress(macAddress);
         return ResponseEntity.ok(logs);
     }
 }
