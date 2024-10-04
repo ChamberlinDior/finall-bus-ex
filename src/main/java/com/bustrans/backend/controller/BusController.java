@@ -1,7 +1,7 @@
 package com.bustrans.backend.controller;
 
-
 import com.bustrans.backend.model.Bus;
+import com.bustrans.backend.model.BusChangeLog;
 import com.bustrans.backend.service.BusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -91,5 +91,12 @@ public class BusController {
             return ResponseEntity.ok("Niveau de batterie et état de charge mis à jour avec succès.");
         }
         return ResponseEntity.notFound().build();
+    }
+
+    // Récupérer l'historique des changements de chauffeur et de destination
+    @GetMapping("/history")
+    public ResponseEntity<List<BusChangeLog>> getBusChangeLog() {
+        List<BusChangeLog> logs = busService.getBusChangeLog();
+        return ResponseEntity.ok(logs);
     }
 }

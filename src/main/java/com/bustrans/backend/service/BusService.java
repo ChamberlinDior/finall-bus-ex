@@ -1,14 +1,13 @@
 package com.bustrans.backend.service;
 
-
-
-
-
 import com.bustrans.backend.model.Bus;
+import com.bustrans.backend.model.BusChangeLog;
 import com.bustrans.backend.repository.BusRepository;
+import com.bustrans.backend.repository.BusChangeLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,6 +15,9 @@ public class BusService {
 
     @Autowired
     private BusRepository busRepository;
+
+    @Autowired
+    private BusChangeLogRepository busChangeLogRepository;
 
     // Récupérer tous les bus
     public List<Bus> getAllBuses() {
@@ -32,14 +34,25 @@ public class BusService {
         return busRepository.findByMacAddress(macAddress);
     }
 
-    // Mettre à jour le chauffeur et la destination
+    // Mettre à jour le chauffeur et la destination et enregistrer dans le log
     public Bus updateChauffeurAndDestinationByMacAddress(String macAddress, String lastDestination, String chauffeurNom, String chauffeurUniqueNumber) {
         Bus bus = busRepository.findByMacAddress(macAddress);
         if (bus != null) {
             bus.setLastDestination(lastDestination);
             bus.setChauffeurNom(chauffeurNom);
             bus.setChauffeurUniqueNumber(chauffeurUniqueNumber);
-            return busRepository.save(bus);
+            Bus updatedBus = busRepository.save(bus);
+
+            // Enregistrer le changement dans le log
+            BusChangeLog changeLog = new BusChangeLog();
+            changeLog.setBusMacAddress(macAddress);
+            changeLog.setChauffeurNom(chauffeurNom);
+            changeLog.setChauffeurUniqueNumber(chauffeurUniqueNumber);
+            changeLog.setDestination(lastDestination);
+            changeLog.setDateChange(new Date());
+            busChangeLogRepository.save(changeLog);
+
+            return updatedBus;
         }
         return null;
     }
@@ -48,7 +61,7 @@ public class BusService {
     public Bus startTrip(String macAddress, String lastDestination) {
         Bus bus = busRepository.findByMacAddress(macAddress);
         if (bus != null) {
-            bus.setDebutTrajet(new java.util.Date());
+            bus.setDebutTrajet(new Date());
             bus.setLastDestination(lastDestination);
             return busRepository.save(bus);
         }
@@ -59,7 +72,7 @@ public class BusService {
     public Bus endTrip(String macAddress) {
         Bus bus = busRepository.findByMacAddress(macAddress);
         if (bus != null) {
-            bus.setFinTrajet(new java.util.Date());
+            bus.setFinTrajet(new Date());
             return busRepository.save(bus);
         }
         return null;
@@ -70,9 +83,14 @@ public class BusService {
         Bus bus = busRepository.findByMacAddress(macAddress);
         if (bus != null) {
             bus.setNiveauBatterie(niveauBatterie);
-            bus.setCharging(isCharging);  // Mise à jour de l'état de charge
+            bus.setCharging(isCharging);
             return busRepository.save(bus);
         }
         return null;
+    }
+
+    // Récupérer l'historique des changements de chauffeur et de destination
+    public List<BusChangeLog> getBusChangeLog() {
+        return busChangeLogRepository.findAll();
     }
 }
