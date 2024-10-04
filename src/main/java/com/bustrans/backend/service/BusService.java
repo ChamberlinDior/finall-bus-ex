@@ -34,7 +34,7 @@ public class BusService {
         return busRepository.findByMacAddress(macAddress);
     }
 
-    // Mettre à jour le chauffeur et la destination et enregistrer dans le log
+    // Mettre à jour le chauffeur et la destination, et enregistrer dans le log
     public Bus updateChauffeurAndDestinationByMacAddress(String macAddress, String lastDestination, String chauffeurNom, String chauffeurUniqueNumber) {
         Bus bus = busRepository.findByMacAddress(macAddress);
         if (bus != null) {
@@ -50,6 +50,7 @@ public class BusService {
             changeLog.setChauffeurUniqueNumber(chauffeurUniqueNumber);
             changeLog.setDestination(lastDestination);
             changeLog.setDateChange(new Date());
+            changeLog.setDebutTrajet(bus.getDebutTrajet());  // Ajouter l'heure du début du trajet s'il est démarré
             busChangeLogRepository.save(changeLog);
 
             return updatedBus;
@@ -61,9 +62,22 @@ public class BusService {
     public Bus startTrip(String macAddress, String lastDestination) {
         Bus bus = busRepository.findByMacAddress(macAddress);
         if (bus != null) {
-            bus.setDebutTrajet(new Date());
+            Date now = new Date();
+            bus.setDebutTrajet(now);
             bus.setLastDestination(lastDestination);
-            return busRepository.save(bus);
+            Bus updatedBus = busRepository.save(bus);
+
+            // Enregistrer dans le log des changements
+            BusChangeLog changeLog = new BusChangeLog();
+            changeLog.setBusMacAddress(macAddress);
+            changeLog.setChauffeurNom(bus.getChauffeurNom());
+            changeLog.setChauffeurUniqueNumber(bus.getChauffeurUniqueNumber());
+            changeLog.setDestination(lastDestination);
+            changeLog.setDateChange(now);
+            changeLog.setDebutTrajet(now);  // Ajouter l'heure du début du trajet
+            busChangeLogRepository.save(changeLog);
+
+            return updatedBus;
         }
         return null;
     }

@@ -26,6 +26,10 @@ public class BusChangeLog {
     @Column(name = "date_change", nullable = false)
     private Date dateChange;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "debut_trajet", nullable = true)  // Ajout du champ pour l'heure de début du trajet
+    private Date debutTrajet;
+
     // Getters et Setters
     public Long getId() {
         return id;
@@ -73,5 +77,13 @@ public class BusChangeLog {
 
     public void setDateChange(Date dateChange) {
         this.dateChange = dateChange;
+    }
+
+    public Date getDebutTrajet() {
+        return debutTrajet;
+    }
+
+    public void setDebutTrajet(Date debutTrajet) {
+        this.debutTrajet = debutTrajet;
     }
 }
